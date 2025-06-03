@@ -16,7 +16,7 @@ pids/
 
 # Environment variables
 .env
-.env.*
+
 
 # Build output
 dist/
