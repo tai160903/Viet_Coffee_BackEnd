@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const notificationSchema = new mongoose.Schema(
   {
-    _id: ObjectId,
     userId: ObjectId,
     deviceToken: String,
     platform: { type: String, enum: ["android", "ios", "web"] },

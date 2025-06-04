@@ -2,10 +2,20 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
   {
-    _id: ObjectId,
-    name: String,
-    phone: String,
-    email: String,
+    username: {
+      type: String,
+      required: () => {
+        this.role === "customer";
+      },
+      unique: true,
+    },
+    name: { type: String, trim: true },
+    phone: { type: String, unique: true, match: /^\d{10}$/, trim: true },
+    email: {
+      type: String,
+      required: () => this.role !== "customer",
+      unique: true,
+    },
     password: String,
     role: {
       type: String,
@@ -13,8 +23,6 @@ const userSchema = new mongoose.Schema(
       default: "customer",
     },
     loyaltyPoints: { type: Number, default: 0 },
-    createdAt: Date,
-    updatedAt: Date,
   },
   {
     timestamps: true,

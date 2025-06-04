@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const staffActivityLogSchema = new mongoose.Schema(
   {
-    _id: ObjectId,
     staffId: ObjectId,
     action: String,
     orderId: ObjectId,

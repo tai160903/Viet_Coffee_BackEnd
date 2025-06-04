@@ -2,27 +2,23 @@ const mongoose = require("mongoose");
 
 const drinkSchema = new mongoose.Schema(
   {
-    _id: ObjectId,
-    name: String,
+    name: { type: String, required: true },
     description: String,
-    basePrice: Number,
-    category: String,
+    basePrice: { type: Number, required: true },
+    category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
     image: String,
-    isAvailable: Boolean,
-    customOptions: {
-      size: [{ label: String, extraPrice: Number }],
-      sugarLevel: [String],
-      iceLevel: [String],
-      toppings: [{ name: String, extraPrice: Number }],
+    isAvailable: { type: Boolean, default: true },
+    customizationOptions: {
+      size: [{ type: mongoose.Schema.Types.ObjectId, ref: "Customization" }],
+      sugar: [{ type: mongoose.Schema.Types.ObjectId, ref: "Customization" }],
+      ice: [{ type: mongoose.Schema.Types.ObjectId, ref: "Customization" }],
+      topping: [{ type: mongoose.Schema.Types.ObjectId, ref: "Customization" }],
     },
-    createdAt: Date,
-    updatedAt: Date,
+    isDeleted: { type: Boolean, default: false },
   },
   {
     timestamps: true,
   }
 );
 
-const Drink = mongoose.model("Drink", drinkSchema);
-
-module.exports = Drink;
+module.exports = mongoose.model("Drink", drinkSchema);

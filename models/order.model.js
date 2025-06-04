@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema(
   {
-    _id: ObjectId,
     userId: ObjectId,
     items: [
       {
@@ -30,8 +29,6 @@ const orderSchema = new mongoose.Schema(
       default: "cash",
     },
     isPOSOrder: Boolean,
-    createdAt: Date,
-    updatedAt: Date,
   },
   {
     timestamps: true,

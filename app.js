@@ -6,7 +6,7 @@ var cors = require("cors");
 var dotenv = require("dotenv");
 var mongoose = require("mongoose");
 
-var indexRouter = require("./routes/index");
+var indexRouter = require("./routes/index.route");
 
 dotenv.config();
 
@@ -35,6 +35,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
+app.use("/api/v1", indexRouter);
 
 module.exports = app;

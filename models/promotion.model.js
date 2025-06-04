@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const promotionSchema = new mongoose.Schema(
   {
-    _id: ObjectId,
     code: String,
     description: String,
     discountType: { type: String, enum: ["percent", "fixed"] },
