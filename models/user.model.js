@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
-      required: () => {
+      required: function () {
         this.role === "customer";
       },
       unique: true,
@@ -13,10 +13,12 @@ const userSchema = new mongoose.Schema(
     phone: { type: String, unique: true, match: /^\d{10}$/, trim: true },
     email: {
       type: String,
-      required: () => this.role !== "customer",
+      required: function () {
+        this.role !== "customer";
+      },
       unique: true,
     },
-    password: String,
+    password: { type: String, required: true },
     role: {
       type: String,
       enum: ["customer", "staff", "admin"],

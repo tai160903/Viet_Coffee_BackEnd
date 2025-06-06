@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+require("./category.model");
+require("./customizationTemplate.model");
 
 const drinkSchema = new mongoose.Schema(
   {
@@ -8,17 +10,15 @@ const drinkSchema = new mongoose.Schema(
     category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
     image: String,
     isAvailable: { type: Boolean, default: true },
-    customizationOptions: {
-      size: [{ type: mongoose.Schema.Types.ObjectId, ref: "Customization" }],
-      sugar: [{ type: mongoose.Schema.Types.ObjectId, ref: "Customization" }],
-      ice: [{ type: mongoose.Schema.Types.ObjectId, ref: "Customization" }],
-      topping: [{ type: mongoose.Schema.Types.ObjectId, ref: "Customization" }],
+    customizationTemplateId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CustomizationTemplate",
+      required: false,
     },
+
     isDeleted: { type: Boolean, default: false },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("Drink", drinkSchema);

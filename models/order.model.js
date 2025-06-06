@@ -2,18 +2,29 @@ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema(
   {
-    userId: ObjectId,
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     items: [
       {
-        drinkId: ObjectId,
+        drinkId: { type: mongoose.Schema.Types.ObjectId, ref: "Drink" },
         name: String,
-        quantity: Number,
+        quantity: {
+          type: Number,
+          required: true,
+          min: 1,
+        },
         size: String,
         sugar: String,
         ice: String,
         toppings: [String],
         note: String,
-        price: Number,
+        price: {
+          type: Number,
+          required: true,
+          min: 0,
+        },
       },
     ],
     totalPrice: Number,

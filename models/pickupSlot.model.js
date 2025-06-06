@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const pickupSlotSchema = new mongoose.Schema(
   {
-    timeRange: { start: Date, end: Date }, // 30min block
+    timeRange: { start: Date, end: Date },
     maxOrders: Number,
     currentOrders: Number,
   },

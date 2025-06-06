@@ -3,11 +3,10 @@ const Drink = require("../models/drink.model");
 const ProductService = {
   getAll: async () => {
     const products = await Drink.find({ isDeleted: false })
-      .populate("category")
-      .populate("customizationOptions.size")
-      .populate("customizationOptions.sugar")
-      .populate("customizationOptions.ice")
-      .populate("customizationOptions.topping");
+      .select("-customizationTemplateId")
+      .populate("category");
+
+    console.log(products);
 
     return {
       message: "Get all products successfully",
@@ -16,13 +15,15 @@ const ProductService = {
   },
 
   getById: async (productId) => {
-    const product = await Drink.findById(productId, { isDeleted: false })
-      .populate("category")
-      .populate("customizationOptions.size")
-      .populate("customizationOptions.sugar")
-      .populate("customizationOptions.ice")
-      .populate("customizationOptions.topping");
-
+    const product = await Drink.findById(productId, {
+      isDeleted: false,
+    }).populate({
+      path: "customizationTemplateId",
+      populate: {
+        path: "optionGroups",
+        model: "OptionGroup",
+      },
+    });
     if (!product) {
       throw new Error("Product not found");
     }

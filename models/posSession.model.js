@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const PosSessionSchema = new mongoose.Schema(
   {
-    sessionCode: { type: String, required: true, unique: true }, // VD: POS-20250601-AM
+    sessionCode: { type: String, required: true, unique: true },
     staffId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Staff",
